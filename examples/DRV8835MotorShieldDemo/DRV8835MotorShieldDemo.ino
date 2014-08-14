@@ -1,7 +1,7 @@
 #include <DRV8835MotorShield.h>
 
 
-DualMotorShield motors;
+DRV8835MotorShield motors;
 
 void setup()
 {

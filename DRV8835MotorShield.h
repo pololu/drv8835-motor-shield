@@ -3,10 +3,10 @@
 
 #include <Arduino.h>
 
-class DualMotorShield
+class DRV8835MotorShield
 {
   public:
-    DualMotorShield();
+    DRV8835MotorShield();
   
     static void setM1Speed(int speed);
     static void setM2Speed(int speed);
@@ -21,8 +21,8 @@ class DualMotorShield
     static unsigned char _M2DIR;
     static unsigned char _M1PWM;
     static unsigned char _M2PWM;
-    static bool flippedM1 = false;
-    static bool flippedM2 = false;
+    static bool flippedM1;
+    static bool flippedM2;
     
     
     static inline void init()
