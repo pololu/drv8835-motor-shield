@@ -14,7 +14,7 @@ DRV8835MotorShield::DRV8835MotorShield()
   unsigned char DRV8835MotorShield::flippedM2 = false;
 }
 
-void DRV8835MotorShield::initPinsAndMaybeTimer()
+void DRV8835MotorShield::initPinsaAndMaybeTimer()
 {
   pinMode(_M1DIR,OUTPUT);
   pinMode(_M1PWM,OUTPUT);
@@ -89,8 +89,8 @@ void DRV8835MotorShield::setM2Speed(int speed)
 }
 
 void DRV8835MotorShield::setSpeeds(int m1Speed, int m2Speed){
-  setM1Speed(m1Speed);
-  setM2Speed(m2Speed);
+  setM1Speed(M1);
+  setM2Speed(M2);
 }
 
 void DRV8835MotorShield::flipM1(bool flip)
