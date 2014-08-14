@@ -6,12 +6,12 @@
 
 DRV8835MotorShield::DRV8835MotorShield()
 {
-  _M1DIR = 7;
-  _M1PWM = 8;
-  _M2DIR = 9;
-  _M2PWM = 10;
-  flippedM1 = false;
-  flippedM2 = false;
+  unsigned char DRV8835MotorShield::_M1DIR = 7;
+  unsigned char DRV8835MotorShield::_M1PWM = 8;
+  unsigned char DRV8835MotorShield::_M2DIR = 9;
+  unsigned char DRV8835MotorShield::_M2PWM = 10;
+  unsigned char DRV8835MotorShield::flippedM1 = false;
+  unsigned char DRV8835MotorShield::flippedM2 = false;
 }
 
 void DRV8835MotorShield::initPinsAndMaybeTimer()
