@@ -17,12 +17,6 @@ class DRV8835MotorShield
   
   private:
     static void initPinsAndMaybeTimer();
-    static unsigned char _M1DIR;
-    static unsigned char _M2DIR;
-    static unsigned char _M1PWM;
-    static unsigned char _M2PWM;
-    static bool flippedM1;
-    static bool flippedM2;
     
     
     static inline void init()
