@@ -16,7 +16,7 @@ class DualMotorShield
     static void flipM2(bool flip);
   
   private:
-    static void init();
+    static void initPinsAndMaybeTimer();
     static unsigned char _M1DIR;
     static unsigned char _M2DIR;
     static unsigned char _M1PWM;
@@ -32,7 +32,7 @@ class DualMotorShield
       if (!initialized)
       {
         initialized = true;
-        init2();
+        initPinsAndMaybeTimer();
       }
     }
 };

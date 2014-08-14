@@ -6,18 +6,29 @@
 
 DualMotorShield::DualMotorShield()
 {
-  _M1DIR = 7;
-  _M1PWM = 8;
-  _M2DIR = 9;
-  _M2PWM = 10;
+  // Do nothing
 }
 
-void DualMotorShield::setup()
+void DualMotorShield::initPinsaAndMaybeTimer()
 {
   pinMode(_M1DIR,OUTPUT);
   pinMode(_M1PWM,OUTPUT);
   pinMode(_M2DIR,OUTPUT);
   pinMode(_M2PWM,OUTPUT);
+  
+  #ifdef USE_20KHZ_PWM
+  // Timer 1 configuration
+  // prescaler: clockI/O / 1
+  // outputs enabled
+  // phase-correct PWM
+  // top of 400
+  //
+  // PWM frequency calculation
+  // 16MHz / 1 (prescaler) / 2 (phase-correct) / 400 (top) = 20kHz
+  TCCR1A = 0b10100000;
+  TCCR1B = 0b00010001;
+  ICR1 = 400;
+#endif
 }
 
 void DualMotorShield::setM1Speed(int speed)
