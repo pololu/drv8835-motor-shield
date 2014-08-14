@@ -4,16 +4,21 @@
   #define USE_20KHZ_PWM
 #endif
 
-  static unsigned char _M1DIR = 7;
-  static unsigned char _M1PWM = 8;
-  static unsigned char _M2DIR = 9;
-  static unsigned char _M2PWM = 10;
-  static bool flippedM1 = false;
-  static bool flippedM2 = false;
+  unsigned char DRV8835MotorShield::_M1DIR;
+  unsigned char DRV8835MotorShield::_M1PWM;
+  unsigned char DRV8835MotorShield::_M2DIR;
+  unsigned char DRV8835MotorShield::_M2PWM;
+  bool DRV8835MotorShield::flippedM1;
+  bool DRV8835MotorShield::flippedM2;
 
 DRV8835MotorShield::DRV8835MotorShield()
 {
-  
+  _M1DIR = 7;
+  _M1PWM = 8;
+  _M2DIR = 9;
+  _M2PWM = 10;
+  flippedM1 = false;
+  flippedM2 = false;
 }
 
 void DRV8835MotorShield::initPinsAndMaybeTimer()
@@ -53,7 +58,7 @@ void DRV8835MotorShield::setM1Speed(int speed)
     speed = 400;
     
 #ifdef USE_20KHZ_PWM
-  OCR1B = speed;
+  OCR1A = speed;
 #else
   analogWrite(_M1PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
 #endif 
@@ -79,7 +84,7 @@ void DRV8835MotorShield::setM2Speed(int speed)
     speed = 400;
     
 #ifdef USE_20KHZ_PWM
-  OCR1A = speed;
+  OCR1B = speed;
 #else
   analogWrite(_M2PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
 #endif
