@@ -8,21 +8,33 @@ class DualMotorShield
   public:
     DualMotorShield();
   
-    void setM1Speed(int speed);
-    void setM2Speed(int speed);
-    void setSpeeds(int m1Speed, int m2Speed);
+    static void setM1Speed(int speed);
+    static void setM2Speed(int speed);
+    static void setSpeeds(int m1Speed, int m2Speed);
     
-    void flipM1(bool flip);
-    void flipM2(bool flip);
+    static void flipM1(bool flip);
+    static void flipM2(bool flip);
   
   private:
-    void init();
-    unsigned char _M1DIR;
-    unsigned char _M2DIR;
-    unsigned char _M1PWM;
-    unsigned char _M2PWM;
-    bool flippedM1 = false;
-    bool flippedM2 = false;
+    static void init();
+    static unsigned char _M1DIR;
+    static unsigned char _M2DIR;
+    static unsigned char _M1PWM;
+    static unsigned char _M2PWM;
+    static bool flippedM1 = false;
+    static bool flippedM2 = false;
+    
+    
+    static inline void init()
+    {
+      static boolean initialized = false;
+
+      if (!initialized)
+      {
+        initialized = true;
+        init2();
+      }
+    }
 };
 
 
