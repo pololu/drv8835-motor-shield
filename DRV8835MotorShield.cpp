@@ -4,22 +4,13 @@
   #define USE_20KHZ_PWM
 #endif
 
-  unsigned char DRV8835MotorShield::_M1DIR;
-  unsigned char DRV8835MotorShield::_M1PWM;
-  unsigned char DRV8835MotorShield::_M2DIR;
-  unsigned char DRV8835MotorShield::_M2PWM;
-  bool DRV8835MotorShield::flippedM1;
-  bool DRV8835MotorShield::flippedM2;
+  const unsigned char DRV8835MotorShield::_M1DIR = 7;
+  const unsigned char DRV8835MotorShield::_M1PWM = 9;
+  const unsigned char DRV8835MotorShield::_M2DIR = 8;
+  const unsigned char DRV8835MotorShield::_M2PWM = 10;
+  bool DRV8835MotorShield::flippedM1 = false;
+  bool DRV8835MotorShield::flippedM2 = false;
 
-DRV8835MotorShield::DRV8835MotorShield()
-{
-  _M1DIR = 7;
-  _M1PWM = 8;
-  _M2DIR = 9;
-  _M2PWM = 10;
-  flippedM1 = false;
-  flippedM2 = false;
-}
 
 void DRV8835MotorShield::initPinsAndMaybeTimer()
 {

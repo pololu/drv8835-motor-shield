@@ -6,7 +6,6 @@
 class DRV8835MotorShield
 {
   public:
-    DRV8835MotorShield();
   
     static void setM1Speed(int speed);
     static void setM2Speed(int speed);
@@ -17,10 +16,10 @@ class DRV8835MotorShield
   
   private:
     static void initPinsAndMaybeTimer();
-    static unsigned char _M1DIR;
-    static unsigned char _M2DIR;
-    static unsigned char _M1PWM;
-    static unsigned char _M2PWM;
+    static const unsigned char _M1DIR;
+    static const unsigned char _M2DIR;
+    static const unsigned char _M1PWM;
+    static const unsigned char _M2PWM;
     static bool flippedM1;
     static bool flippedM2;
     
