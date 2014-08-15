@@ -18,6 +18,18 @@ h3. Hardware
 
 The Pololu DRV8835 Dual Motor Driver Shield for Arduino can be purchased on "Pololu's website":http://www.pololu.com/catalog/product/2511.
 
+h3. Compatible Arduino boards
+
+This shield should work with all Arduino boards and clones that behave like a standard Arduino board. We have specifically tested this shield (using this Arduino library) with:
+
+* Arduino Uno R3
+* Arduino Leonardo
+* Arduino Mega 2560
+* Arduino Due
+* Arduino Duemilanove (ATmega328P)
+
+This library configures Timer 1 on the Uno R3, Leonardo, and Duemilanove to generate a 20 kHz PWM frequency for the motors. The library uses analogWrite on the Mega 2560, and Due, which generates 489 Hz and 1 kHz PWM frequencies, respectively with the default timer configuration.
+
 h2. Example program
 
 h3. Demo
