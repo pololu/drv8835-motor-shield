@@ -1,16 +1,18 @@
 #ifndef DRV8835MotorShield_h
 #define DRV8835MotorShield_h
 
+#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || defined (__AVR_ATmega32U4__)
+  #define DRV8835MOTORSHIELD_USE_20KHZ_PWM
+#endif
+
 #include <Arduino.h>
 
 class DRV8835MotorShield
 {
   public:
-  
     static void setM1Speed(int speed);
     static void setM2Speed(int speed);
     static void setSpeeds(int m1Speed, int m2Speed);
-    
     static void flipM1(bool flip);
     static void flipM2(bool flip);
   
@@ -23,7 +25,6 @@ class DRV8835MotorShield
     static bool flippedM1;
     static bool flippedM2;
     
-    
     static inline void init()
     {
       static boolean initialized = false;
@@ -35,6 +36,4 @@ class DRV8835MotorShield
       }
     }
 };
-
-
 #endif

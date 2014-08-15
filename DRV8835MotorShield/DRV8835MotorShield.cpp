@@ -1,16 +1,10 @@
 #include "DRV8835MotorShield.h"
-
-#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || defined (__AVR_ATmega32U4__)
-  #define USE_20KHZ_PWM
-#endif
-
-  const unsigned char DRV8835MotorShield::_M1DIR = 7;
-  const unsigned char DRV8835MotorShield::_M1PWM = 9;
-  const unsigned char DRV8835MotorShield::_M2DIR = 8;
-  const unsigned char DRV8835MotorShield::_M2PWM = 10;
-  bool DRV8835MotorShield::flippedM1 = false;
-  bool DRV8835MotorShield::flippedM2 = false;
-
+const unsigned char DRV8835MotorShield::_M1DIR = 7;
+const unsigned char DRV8835MotorShield::_M1PWM = 9;
+const unsigned char DRV8835MotorShield::_M2DIR = 8;
+const unsigned char DRV8835MotorShield::_M2PWM = 10;
+bool DRV8835MotorShield::flippedM1 = false;
+bool DRV8835MotorShield::flippedM2 = false;
 
 void DRV8835MotorShield::initPinsAndMaybeTimer()
 {
@@ -19,7 +13,7 @@ void DRV8835MotorShield::initPinsAndMaybeTimer()
   pinMode(_M2DIR,OUTPUT);
   pinMode(_M2PWM,OUTPUT);
   
-  #ifdef USE_20KHZ_PWM
+#ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
   // Timer 1 configuration
   // prescaler: clockI/O / 1
   // outputs enabled
@@ -48,7 +42,7 @@ void DRV8835MotorShield::setM1Speed(int speed)
   if (speed > 400)  // Max 
     speed = 400;
     
-#ifdef USE_20KHZ_PWM
+#ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
   OCR1A = speed;
 #else
   analogWrite(_M1PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
@@ -71,10 +65,10 @@ void DRV8835MotorShield::setM2Speed(int speed)
     speed = -speed;  // Make speed a positive quantity
     reverse = 1;  // Preserve the direction
   }
-  if (speed > 400)  // Max PWM dutycycle
+  if (speed > 400)  // Max PWM duty cycle
     speed = 400;
     
-#ifdef USE_20KHZ_PWM
+#ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
   OCR1B = speed;
 #else
   analogWrite(_M2PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
