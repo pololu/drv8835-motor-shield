@@ -22,8 +22,8 @@ class DRV8835MotorShield
     static const unsigned char _M2DIR;
     static const unsigned char _M1PWM;
     static const unsigned char _M2PWM;
-    static boolean flippedM1;
-    static boolean flippedM2;
+    static boolean _flipM1;
+    static boolean _flipM2;
     
     static inline void init()
     {
