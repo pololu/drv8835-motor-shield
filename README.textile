@@ -28,7 +28,7 @@ This shield should work with all Arduino boards and clones that behave like a st
 * Arduino Due
 * Arduino Duemilanove (ATmega328P)
 
-This library configures Timer 1 on the Uno R3, Leonardo, and Duemilanove to generate a 20 kHz PWM frequency for the motors. The library uses `analogWrite` on for any board that does not use an ATmega168, ATmega328P or ATmega32U4. On the Mega 2560 and Due, `analogWrite` generates 489 Hz and 1 kHz PWM frequencies, respectively, with the default timer configuration.
+This library configures Timer 1 on the Uno R3, Leonardo, and Duemilanove to generate a 20 kHz PWM frequency for the motors. The library uses analogWrite on for any board that does not use an ATmega168, ATmega328P or ATmega32U4. On the Mega 2560 and Due, analogWrite generates 489 Hz and 1 kHz PWM frequencies, respectively, with the default timer configuration.
 
 h2. Example program
 
