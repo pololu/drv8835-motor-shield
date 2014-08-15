@@ -1,14 +1,14 @@
 h1. Arduino library for the Pololu DRV8835 Dual Motor Driver Shield for Arduino
 
 Version: 1.0.0
-Release Date: 2014-08-14
+Release Date: 2014-08-15
 "www.pololu.com":http://www.pololu.com/
 
 h2. Summary
 
 This is a library for the "Arduino":http://pololu.com/catalog/product/2191 that interfaces with the "Pololu DRV8835 Dual Motor Driver Shield for Arduino":http://www.pololu.com/catalog/product/2511. It makes it simple to drive two brushed, DC motors.
 
-h2. Getting Started
+h2. Getting started
 
 h3. Software
 
@@ -18,7 +18,7 @@ h3. Hardware
 
 The Pololu DRV8835 Dual Motor Driver Shield for Arduino can be purchased on "Pololu's website":http://www.pololu.com/catalog/product/2511.
 
-h2. Example Program
+h2. Example program
 
 h3. Demo
 
@@ -26,19 +26,14 @@ Open this example code sketch by selecting File->Examples->DRV8835MotorShield->D
 
 The demo ramps motor 1 from stopped to full speed forward, ramps down to full speed reverse, and back to stopped. Then, it does the same with the other motor.
 
-h2. Library Reference
+h2. Library reference
 
-- @DRV8835MotorShield()@ := Default constructor, selects the default pins as connected by the motor shield.
-
-- @void init()@ := Initialize pinModes and timer1. This method should be called in the Arduino init method.
-   
-- @void setM1Speed(int speed)@ := Set speed and direction for motor 1. Speed should be between -400 and 400. 400 corresponds to motor current flowing from M1A to M1B. -400 corresponds to motor current flowing from M1B to M1A.
-- @void setM2Speed(int speed)@ := Set speed and direction for motor 2. Speed should be between -400 and 400. 400 corresponds to motor current flowing from M2A to M2B. -400 corresponds to motor current flowing from M2B to M2A.
+- @void setM1Speed(int speed)@ := Set speed and direction for motor 1. Speed should be between -400 and 400. The motors brake at 0 speed. Positive speeds correspond to motor current flowing from M1A to M1B. Negative speeds correspond to motor current flowing from M1B to M1A.
+- @void setM2Speed(int speed)@ := Set speed and direction for motor 2. Speed should be between -400 and 400. The motors brake at 0 speed. Positive speeds correspond to motor current flowing from M2A to M2B. Negative speeds correspond to motor current flowing from M2B to M2A.
 - @void setSpeeds(int m1Speed, int m2Speed)@ := Set speed and direction for motor 1 and 2. 
-
 - @void flipM1(bool flip)@ := Flip the direction meaning of the speed passed to the setSpeeds function for motor 1.  The default direction corresponds to flipM1(false) having been called.
 - @void flipM2(bool flip)@ := Flip the direction meaning of the speed passed to the setSpeeds function for motor 2.  The default direction corresponds to flipM2(false) having been called.
 
-h2. Version History
+h2. Version history
 
-* 1.0.0 (2014-08-14): Original release.
+* 1.0.0 (2014-08-15): Original release.
