@@ -1,20 +1,19 @@
 #include "DRV8835MotorShield.h"
 const unsigned char DRV8835MotorShield::_M1DIR = 7;
-const unsigned char DRV8835MotorShield::_M1PWM = 9;
 const unsigned char DRV8835MotorShield::_M2DIR = 8;
+const unsigned char DRV8835MotorShield::_M1PWM = 9;
 const unsigned char DRV8835MotorShield::_M2PWM = 10;
-bool DRV8835MotorShield::flippedM1 = false;
-bool DRV8835MotorShield::flippedM2 = false;
+boolean DRV8835MotorShield::_flipM1 = false;
+boolean DRV8835MotorShield::_flipM2 = false;
 
 void DRV8835MotorShield::initPinsAndMaybeTimer()
 {
-  pinMode(_M1DIR,OUTPUT);
-  pinMode(_M1PWM,OUTPUT);
-  pinMode(_M2DIR,OUTPUT);
-  pinMode(_M2PWM,OUTPUT);
-  
+  pinMode(_M1DIR, OUTPUT);
+  pinMode(_M1PWM, OUTPUT);
+  pinMode(_M2DIR, OUTPUT);
+  pinMode(_M2PWM, OUTPUT);
 #ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
-  // Timer 1 configuration
+  // timer 1 configuration
   // prescaler: clockI/O / 1
   // outputs enabled
   // phase-correct PWM
@@ -28,6 +27,7 @@ void DRV8835MotorShield::initPinsAndMaybeTimer()
 #endif
 }
 
+// speed should be a number between -400 and 400
 void DRV8835MotorShield::setM1Speed(int speed)
 {
   init(); // initialize if necessary
@@ -39,7 +39,7 @@ void DRV8835MotorShield::setM1Speed(int speed)
     speed = -speed; // make speed a positive quantity
     reverse = 1;    // preserve the direction
   }
-  if (speed > 400)  // Max 
+  if (speed > 400)  // max 
     speed = 400;
     
 #ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
@@ -48,12 +48,13 @@ void DRV8835MotorShield::setM1Speed(int speed)
   analogWrite(_M1PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
 #endif 
 
-  if (reverse ^ flippedM1) // flip if speed was negative or flipLeft setting is active, but not both
+  if (reverse ^ _flipM1) // flip if speed was negative or _flipM1 setting is active, but not both
     digitalWrite(_M1DIR, HIGH);
   else
     digitalWrite(_M1DIR, LOW);
 }
 
+// speed should be a number between -400 and 400
 void DRV8835MotorShield::setM2Speed(int speed)
 {
   init(); // initialize if necessary
@@ -62,10 +63,10 @@ void DRV8835MotorShield::setM2Speed(int speed)
   
   if (speed < 0)
   {
-    speed = -speed;  // Make speed a positive quantity
-    reverse = 1;  // Preserve the direction
+    speed = -speed;  // make speed a positive quantity
+    reverse = 1;  // preserve the direction
   }
-  if (speed > 400)  // Max PWM duty cycle
+  if (speed > 400)  // max PWM duty cycle
     speed = 400;
     
 #ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
@@ -74,23 +75,25 @@ void DRV8835MotorShield::setM2Speed(int speed)
   analogWrite(_M2PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
 #endif
 
-  if (reverse ^ flippedM2) // flip if speed was negative or flipRight setting is active, but not both
+  if (reverse ^ _flipM2) // flip if speed was negative or _flipM2 setting is active, but not both
     digitalWrite(_M2DIR, HIGH);
   else
     digitalWrite(_M2DIR, LOW);
 }
 
+// set speed for both motors
+// speed should be a number between -400 and 400
 void DRV8835MotorShield::setSpeeds(int m1Speed, int m2Speed){
   setM1Speed(m1Speed);
   setM2Speed(m2Speed);
 }
 
-void DRV8835MotorShield::flipM1(bool flip)
+void DRV8835MotorShield::flipM1(boolean flip)
 {
-  flippedM1 = flip;
+  _flipM1 = flip;
 }
 
-void DRV8835MotorShield::flipM2(bool flip)
+void DRV8835MotorShield::flipM2(boolean flip)
 {
-  flippedM2 = flip;
+  _flipM2 = flip;
 }

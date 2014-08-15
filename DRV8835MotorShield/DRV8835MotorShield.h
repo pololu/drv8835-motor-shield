@@ -13,8 +13,8 @@ class DRV8835MotorShield
     static void setM1Speed(int speed);
     static void setM2Speed(int speed);
     static void setSpeeds(int m1Speed, int m2Speed);
-    static void flipM1(bool flip);
-    static void flipM2(bool flip);
+    static void flipM1(boolean flip);
+    static void flipM2(boolean flip);
   
   private:
     static void initPinsAndMaybeTimer();
@@ -22,8 +22,8 @@ class DRV8835MotorShield
     static const unsigned char _M2DIR;
     static const unsigned char _M1PWM;
     static const unsigned char _M2PWM;
-    static bool flippedM1;
-    static bool flippedM2;
+    static boolean flippedM1;
+    static boolean flippedM2;
     
     static inline void init()
     {
