@@ -8,10 +8,28 @@ boolean DRV8835MotorShield::_flipM2 = false;
 
 void DRV8835MotorShield::initPinsAndMaybeTimer()
 {
-  pinMode(_M1DIR, OUTPUT);
+  // Initialize the pin states used by the motor driver shield
+  // digitalWrite is called before and after setting pinMode.
+  // It called before pinMode to handle the case where the board
+  // is using an ATmega AVR to avoid ever driving the pin high, 
+  // even for a short time.
+  // It is called after pinMode to handle the case where the board
+  // is based on the Atmel SAM3X8E ARM Cortex-M3 CPU, like the Arduino
+  // Due. This is necessary because when pinMode is called for the Due
+  // it sets the output to high (or 3.3V) regardless of previous
+  // digitalWrite calls.
+  digitalWrite(_M1PWM, LOW);
   pinMode(_M1PWM, OUTPUT);
-  pinMode(_M2DIR, OUTPUT);
+  digitalWrite(_M1PWM, LOW);
+  digitalWrite(_M2PWM, LOW);
   pinMode(_M2PWM, OUTPUT);
+  digitalWrite(_M2PWM, LOW);
+  digitalWrite(_M1DIR, LOW);
+  pinMode(_M1DIR, OUTPUT);
+  digitalWrite(_M1DIR, LOW);
+  digitalWrite(_M2DIR, LOW);
+  pinMode(_M2DIR, OUTPUT);
+  digitalWrite(_M2DIR, LOW);
 #ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
   // timer 1 configuration
   // prescaler: clockI/O / 1
