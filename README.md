@@ -2,7 +2,7 @@
 
 Version: 2.0.0 <br>
 Release date: 2016-08-18 <br>
-[![Build Status](https://travis-ci.org/pololu/drv8835-motor-shield.svg?branch=master)](https://travis-ci.org/pololu/drv8835-motor-shield)<br>
+[![Build Status](https://travis-ci.org/pololu/drv8835-motor-shield.svg?branch=master)](https://travis-ci.org/pololu/drv8835-motor-shield) <br>
 [www.pololu.com](https://www.pololu.com/)
 
 ## Summary
@@ -66,7 +66,7 @@ If this does not work, you can manually install the library:
    the folder yourself.
 4. After installing the library, restart the Arduino IDE.
 
-### Example program
+## Example program
 
 An example sketch is available that shows how to use the library.  You
 can access it from the Arduino IDE by opening the "File" menu,
@@ -74,7 +74,7 @@ selecting "Examples", and then selecting "DRV8835MotorShield".  If
 you cannot find these examples, the library was probably installed
 incorrectly and you should retry the installation instructions above.
 
-#### Demo
+### Demo
 
 The demo ramps motor 1 from stopped to full speed forward, ramps down
 to full speed reverse, and back to stopped. Then, it does the same
