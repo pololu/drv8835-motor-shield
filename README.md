@@ -58,7 +58,7 @@ If this does not work, you can manually install the library:
 1. Download the
    [latest release archive from GitHub](https://github.com/pololu/drv8835-motor-shield/releases)
    and decompress it.
-2. Rename the folder "lps-arduino-xxxx" to "DRV8835MotorShield".
+2. Rename the folder "drv8835-motor-shield-xxxx" to "DRV8835MotorShield".
 3. Drag the "DRV8835MotorShield" folder into the "libraries" directory inside your
    Arduino sketchbook directory. You can view your sketchbook location by
    opening the "File" menu and selecting "Preferences" in the Arduino IDE. If
