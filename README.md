@@ -83,7 +83,7 @@ with the other motor.
 
 - `DRV8835MotorShield()` <br> Default constructor, selects the
   default pins as connected by the motor shield.
-- `DRV8835MotorShield(uint8_t char M1DIR, uint8_t M1PWM, uint8_t
+- `DRV8835MotorShield(uint8_t M1DIR, uint8_t M1PWM, uint8_t
    M2DIR, uint8_t M2PWM)` <br> Alternate
    constructor for shield connections remapped by user. If M1PWM and
    M2PWM are remapped, it will try to use analogWrite instead of
