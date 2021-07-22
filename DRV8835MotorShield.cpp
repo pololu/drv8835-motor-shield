@@ -1,10 +1,21 @@
 #include "DRV8835MotorShield.h"
-const unsigned char DRV8835MotorShield::_M1DIR = 7;
-const unsigned char DRV8835MotorShield::_M2DIR = 8;
-const unsigned char DRV8835MotorShield::_M1PWM = 9;
-const unsigned char DRV8835MotorShield::_M2PWM = 10;
-boolean DRV8835MotorShield::_flipM1 = false;
-boolean DRV8835MotorShield::_flipM2 = false;
+
+// Constructors ////////////////////////////////////////////////////////////////
+
+DRV8835MotorShield::DRV8835MotorShield() :
+  _M1DIR(7), _M1PWM(9), _M2DIR(8), _M2PWM(10)
+{
+}
+
+DRV8835MotorShield::DRV8835MotorShield(uint8_t M1DIR,
+                                       uint8_t M1PWM,
+                                       uint8_t M2DIR,
+                                       uint8_t M2PWM) :
+  _M1DIR(M1DIR), _M1PWM(M1PWM),
+  _M2DIR(M2DIR), _M2PWM(M2PWM)
+{
+}
+
 
 void DRV8835MotorShield::initPinsAndMaybeTimer()
 {
@@ -30,18 +41,21 @@ void DRV8835MotorShield::initPinsAndMaybeTimer()
   digitalWrite(_M2DIR, LOW);
   pinMode(_M2DIR, OUTPUT);
   digitalWrite(_M2DIR, LOW);
-#ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
-  // timer 1 configuration
-  // prescaler: clockI/O / 1
-  // outputs enabled
-  // phase-correct PWM
-  // top of 400
-  //
-  // PWM frequency calculation
-  // 16MHz / 1 (prescaler) / 2 (phase-correct) / 400 (top) = 20kHz
-  TCCR1A = 0b10100000;
-  TCCR1B = 0b00010001;
-  ICR1 = 400;
+#ifdef DRV8835MotorShield_TIMER1_AVAILABLE
+  if (_M1PWM == _M1PWM_TIMER1_PIN && _M2PWM == _M2PWM_TIMER1_PIN)
+  {
+	// timer 1 configuration
+	// prescaler: clockI/O / 1
+	// outputs enabled
+	// phase-correct PWM
+	// top of 400
+	//
+	// PWM frequency calculation
+	// 16MHz / 1 (prescaler) / 2 (phase-correct) / 400 (top) = 20kHz
+	TCCR1A = 0b10100000;
+	TCCR1B = 0b00010001;
+	ICR1 = 400;
+  }
 #endif
 }
 
@@ -60,8 +74,15 @@ void DRV8835MotorShield::setM1Speed(int speed)
   if (speed > 400)  // max 
     speed = 400;
     
-#ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
-  OCR1A = speed;
+#ifdef DRV8835MotorShield_TIMER1_AVAILABLE
+  if (_M1PWM == _M1PWM_TIMER1_PIN && _M2PWM == _M2PWM_TIMER1_PIN)
+  {
+    OCR1A = speed;
+  }
+  else
+  {
+    analogWrite(_M1PWM, speed * 51 / 80); // map 400 to 255
+  }
 #else
   analogWrite(_M1PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
 #endif 
@@ -87,8 +108,15 @@ void DRV8835MotorShield::setM2Speed(int speed)
   if (speed > 400)  // max PWM duty cycle
     speed = 400;
     
-#ifdef DRV8835MOTORSHIELD_USE_20KHZ_PWM
-  OCR1B = speed;
+#ifdef DRV8835MotorShield_TIMER1_AVAILABLE
+  if (_M1PWM == _M1PWM_TIMER1_PIN && _M2PWM == _M2PWM_TIMER1_PIN)
+  {
+    OCR1B = speed;
+  }
+  else
+  {
+    analogWrite(_M2PWM, speed * 51 / 80); // map 400 to 255
+  }
 #else
   analogWrite(_M2PWM, speed * 51 / 80); // default to using analogWrite, mapping 400 to 255
 #endif

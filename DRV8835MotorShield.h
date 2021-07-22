@@ -1,8 +1,8 @@
-#ifndef DRV8835MotorShield_h
-#define DRV8835MotorShield_h
+#pragma once
 
-#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || defined (__AVR_ATmega32U4__)
-  #define DRV8835MOTORSHIELD_USE_20KHZ_PWM
+#if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || \
+    defined(__AVR_ATmega328PB__) || defined (__AVR_ATmega32U4__)
+  #define DRV8835MotorShield_TIMER1_AVAILABLE
 #endif
 
 #include <Arduino.h>
@@ -10,25 +10,35 @@
 class DRV8835MotorShield
 {
   public:
-    static void setM1Speed(int speed);
-    static void setM2Speed(int speed);
-    static void setSpeeds(int m1Speed, int m2Speed);
-    static void flipM1(boolean flip);
-    static void flipM2(boolean flip);
+	DRV8835MotorShield();
+    DRV8835MotorShield(uint8_t M1DIR,
+                       uint8_t M1PWM,
+                       uint8_t M2DIR,
+                       uint8_t M2PWM);
+	
+    void setM1Speed(int speed);
+    void setM2Speed(int speed);
+    void setSpeeds(int m1Speed, int m2Speed);
+    void flipM1(boolean flip);
+    void flipM2(boolean flip);
   
   private:
-    static void initPinsAndMaybeTimer();
-    static const unsigned char _M1DIR;
-    static const unsigned char _M2DIR;
-    static const unsigned char _M1PWM;
-    static const unsigned char _M2PWM;
-    static boolean _flipM1;
-    static boolean _flipM2;
+    void initPinsAndMaybeTimer();
+	
+    uint8_t _M1DIR;
+    uint8_t _M2DIR;
+    uint8_t _M1PWM;
+	static const uint8_t _M1PWM_TIMER1_PIN = 9;
+    uint8_t _M2PWM;
+	static const uint8_t _M2PWM_TIMER1_PIN = 10;
+	
+    bool _flipM1 = false;
+    bool _flipM2 = false;
+	
+	bool initialized = false;
     
-    static inline void init()
+    inline void init()
     {
-      static boolean initialized = false;
-
       if (!initialized)
       {
         initialized = true;
@@ -36,4 +46,3 @@ class DRV8835MotorShield
       }
     }
 };
-#endif
