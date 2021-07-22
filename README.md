@@ -14,6 +14,8 @@ It makes it simple to drive two brushed, DC motors.
 
 ## Getting started
 
+add here a defaulft pinout list and a how-to change defualt pin settings
+
 ### Hardware
 
 The
