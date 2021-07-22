@@ -1,8 +1,7 @@
 # Arduino library for the Pololu DRV8835 Dual Motor Driver Shield
 
-Version: 2.0.0 <br>
-Release date: 2016-08-18 <br>
-[![Build Status](https://travis-ci.org/pololu/drv8835-motor-shield.svg?branch=master)](https://travis-ci.org/pololu/drv8835-motor-shield) <br>
+Version: 2.1.0 <br>
+Release date: 2021-07-22 <br>
 [www.pololu.com](https://www.pololu.com/)
 
 ## Summary
@@ -82,6 +81,13 @@ with the other motor.
 
 ## Documentation
 
+- `DRV8835MotorShield()` <br> Default constructor, selects the
+  default pins as connected by the motor shield.
+- `DRV8835MotorShield(uint8_t char M1DIR, uint8_t M1PWM, uint8_t
+   M2DIR, uint8_t M2PWM)` <br> Alternate
+   constructor for shield connections remapped by user. If M1PWM and
+   M2PWM are remapped, it will try to use analogWrite instead of
+   timer1.
 - `void setM1Speed(int speed)` <br> Set speed and direction for
   motor 1. Speed should be between -400 and 400. The motors brake at 0
   speed. Positive speeds correspond to motor current flowing from M1A
@@ -103,6 +109,7 @@ with the other motor.
 
 ## Version history
 
+* 2.1.0 (2021-07-22): Added support for remapping pins.
 * 2.0.0 (2016-08-18): Updated library to work with the Arduino Library Manager.
 * 1.0.1 (2014-08-15): Fix pin initializations so the Arduino Due doesn't drive the motors when the sketch starts.
 * 1.0.0 (2014-08-15): Original release.
